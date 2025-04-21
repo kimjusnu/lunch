@@ -35,47 +35,38 @@ declare global {
     }
 }
 
-// ✅ 카카오 앱 키 (환경변수로부터 불러옴)
+// ✅ 환경변수에서 Kakao 앱 키 가져오기
 const KAKAO_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY!;
+const APP_URL = "https://lunchmenu-one.vercel.app"; // ✅ 배포된 도메인
 
-// ✅ Kakao 초기화 함수
 const initKakao = () => {
-    if (
-        typeof window !== "undefined" &&
-        window.Kakao &&
-        !window.Kakao.isInitialized()
-    ) {
+    if (typeof window !== "undefined" && window.Kakao && !window.Kakao.isInitialized()) {
         window.Kakao.init(KAKAO_APP_KEY);
     }
 };
 
-// ✅ props 정의
 interface ShareButtonProps {
     foodName: string;
     message: string;
-    imageUrl: string; // e.g. "/pumpkin-salad.svg"
+    imageUrl: string; // ex: "/sundae-bokkeum.svg"
 }
 
-// ✅ 컴포넌트 시작
 const ShareButton = ({ foodName, message, imageUrl }: ShareButtonProps) => {
     const [toastOpen, setToastOpen] = useState(false);
 
-    // ✅ 실제 공유 텍스트
-    const shareText = `오늘 점심은 "${foodName}" 어때요?\n${message}\n👉 메뉴 추천: https://your-app.vercel.app`;
+    const shareText = `오늘 점심은 "${foodName}" 어때요?\n${message}\n👉 메뉴 추천: ${APP_URL}`;
 
-    // ✅ 페이지 로드 시 카카오 SDK 초기화
     useEffect(() => {
         initKakao();
     }, []);
 
-    // ✅ Web Share API or Clipboard fallback
     const handleWebShareOrClipboard = async () => {
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: "오늘 뭐 먹지?",
                     text: shareText,
-                    url: window.location.href,
+                    url: APP_URL,
                 });
             } catch (err) {
                 console.error("공유 취소됨:", err);
@@ -90,7 +81,6 @@ const ShareButton = ({ foodName, message, imageUrl }: ShareButtonProps) => {
         }
     };
 
-    // ✅ Kakao 공유 버튼 클릭 시 처리
     const handleKakaoShare = () => {
         if (!window.Kakao?.isInitialized()) {
             alert("카카오톡 공유 초기화 오류");
@@ -102,18 +92,18 @@ const ShareButton = ({ foodName, message, imageUrl }: ShareButtonProps) => {
             content: {
                 title: "오늘의 점심 메뉴 🍽️",
                 description: message,
-                imageUrl: `https://your-app.vercel.app${imageUrl}`, // ✅ 절대 경로로 변환
+                imageUrl: `${APP_URL}${imageUrl}`, // ✅ 절대 경로로 변환됨
                 link: {
-                    webUrl: "https://your-app.vercel.app",
-                    mobileWebUrl: "https://your-app.vercel.app",
+                    webUrl: APP_URL,
+                    mobileWebUrl: APP_URL,
                 },
             },
             buttons: [
                 {
                     title: "메뉴 추천 받기",
                     link: {
-                        webUrl: "https://your-app.vercel.app",
-                        mobileWebUrl: "https://your-app.vercel.app",
+                        webUrl: APP_URL,
+                        mobileWebUrl: APP_URL,
                     },
                 },
             ],
