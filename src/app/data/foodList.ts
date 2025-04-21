@@ -1,3 +1,18 @@
+export interface FoodItem {
+    id: string;
+    name: string;
+    category: string;
+    image: string;
+    calorie: number;
+    tags: string[];
+    message: string;
+    isSpicy: boolean;
+    isHot: boolean;
+    isSoup: boolean;
+    isRiceBased: boolean;
+    isNoodleBased: boolean;
+}
+
 export type MenuItem = {
     id: string;
     name: string;
@@ -2832,6 +2847,7 @@ export const foodList: MenuItem[] = [
         isRiceBased: false,
         isNoodleBased: false,
     },
+    // 여기까지 이미지 저장함
     // 패스트푸드
     {
         id: "bulgogi-burger",
@@ -3185,12 +3201,12 @@ export const foodList: MenuItem[] = [
     },
     {
         id: "fries-cheese-ball",
-        name: "감자튀김치즈볼",
+        name: "치즈볼",
         category: "패스트푸드",
         image: "/fries-cheese-ball.svg",
         calorie: 680,
-        tags: ["감자", "치즈", "사이드", "중독성"],
-        message: "겉은 감자, 속은 치즈. 치즈볼은 손이 멈추질 않아.",
+        tags: ["치즈", "사이드", "중독성"],
+        message: "치즈볼은 손이 멈추질 않아.",
         isSpicy: false,
         isHot: true,
         isSoup: false,
@@ -4516,33 +4532,3 @@ export const foodList: MenuItem[] = [
         isNoodleBased: false,
     },
 ];
-
-// 특정 카테고리의 음식만 필터링해서 반환
-export const getFoodsByCategory = (category: string) => {
-    return foodList.filter(item => item.category === category);
-};
-
-// 매운 음식만 필터링
-export const getSpicyFoods = () => {
-    return foodList.filter(item => item.isSpicy);
-};
-
-// 따뜻한 음식만 필터링
-export const getHotFoods = () => {
-    return foodList.filter(item => item.isHot);
-};
-
-// 국물 있는 음식만 필터링
-export const getSoupFoods = () => {
-    return foodList.filter(item => item.isSoup);
-};
-
-// 밥이 주가 되는 음식만 필터링
-export const getRiceFoods = () => {
-    return foodList.filter(item => item.isRiceBased);
-};
-
-// 면이 주가 되는 음식만 필터링
-export const getNoodleFoods = () => {
-    return foodList.filter(item => item.isNoodleBased);
-};
