@@ -40,8 +40,16 @@ const KAKAO_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY!;
 const APP_URL = "https://lunchmenu-one.vercel.app"; // ✅ 배포된 도메인
 
 const initKakao = () => {
-    if (typeof window !== "undefined" && window.Kakao && !window.Kakao.isInitialized()) {
+    if (
+        typeof window !== "undefined" &&
+        window.Kakao &&
+        !window.Kakao.isInitialized()
+    ) {
+        console.log("✅ Kakao 초기화 시작. 앱 키:", KAKAO_APP_KEY); // 🔍 앱 키 확인
         window.Kakao.init(KAKAO_APP_KEY);
+        console.log("✅ Kakao 초기화 완료");
+    } else {
+        console.log("⛔ Kakao SDK가 로드되지 않았거나 이미 초기화됨");
     }
 };
 
