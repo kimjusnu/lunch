@@ -30,6 +30,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                {/* ✅ 카카오 SDK script 추가 */}
+                <script
+                    src="https://developers.kakao.com/sdk/js/kakao.js"
+                    async
+                ></script>
+            </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
