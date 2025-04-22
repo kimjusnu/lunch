@@ -10,6 +10,7 @@ import MainHeader from "./MainHeader";
 import ShareButton from "./ShareButton";
 import KakaoAdBanner_250 from "./KakaoAdBanner_250";
 import KakaoAdBanner_300 from "./KakaoAdBanner_300";
+import AdSenseBanner from "./AdSenseBanner";
 
 const categoryOptions = [
     "한식",
@@ -34,6 +35,7 @@ const ClientMain = () => {
 
     const [selected, setSelected] = useState<FoodItem | null>(null);
     const [history, setHistory] = useState<FoodItem[]>([]);
+    const [clickCount, setClickCount] = useState(0); // ✅ 추천 클릭 횟수 추적
 
     useEffect(() => {
         const random = getRandomFood(foodList);
@@ -61,6 +63,7 @@ const ClientMain = () => {
         }
 
         setSelected(newFood);
+        setClickCount(prev => prev + 1); // ✅ 클릭 카운트 증가
 
         setHistory(prev => {
             const exists = prev.find(item => item.id === newFood.id);
@@ -101,8 +104,15 @@ const ClientMain = () => {
             {selected && <FoodCard food={selected} />}
             <RecommendButton onClick={handleRecommend} />
 
-            {/* ✅ 광고 1 - 추천 버튼 아래 */}
+            {/* ✅ 광고 1 - 추천 버튼 아래 (카카오) */}
             <KakaoAdBanner_250 />
+
+            {/* ✅ 광고 2 - 5회 클릭 시 애드센스 배너 표시 */}
+            {clickCount >= 5 && (
+                <div className="w-full flex justify-center">
+                    <AdSenseBanner />
+                </div>
+            )}
 
             {selected && (
                 <ShareButton
@@ -118,7 +128,7 @@ const ClientMain = () => {
                         최근 본 메뉴
                     </h3>
 
-                    {/* ✅ 광고 2 - 히스토리 위 */}
+                    {/* ✅ 광고 3 - 히스토리 위 */}
                     <div className="flex justify-center mb-4">
                         <KakaoAdBanner_300 />
                     </div>
