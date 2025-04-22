@@ -12,7 +12,7 @@ interface FoodCardProps {
 const FoodCard = ({ food }: FoodCardProps) => {
     return (
         <div className="w-full max-w-xs bg-[#FFF085] rounded-xl shadow-lg p-4 text-center">
-            <div className="flex justify-center">
+            <div className="flex items-center justify-center">
                 <ImageWithSkeleton
                     src={food.image}
                     alt={food.name}
