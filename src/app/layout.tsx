@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script"; // ✅ 이거 import 필요!
+import Head from "next/head";
+import RegisterServiceWorker from "./components/_components/RegisterServiceWorker";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -31,9 +33,23 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
+            <Head>
+                <meta name="theme-color" content="#FCB454" />
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta
+                    name="apple-mobile-web-app-status-bar-style"
+                    content="default"
+                />
+                <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+            </Head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
+                {/* ✅ Service Worker 등록 */}
+                <RegisterServiceWorker />
+
                 {/* ✅ 카카오 SDK Script (SSR-safe) */}
                 <Script
                     src="https://developers.kakao.com/sdk/js/kakao.js"
