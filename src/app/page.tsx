@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { foodList } from "./data/foodList";
 import { getRandomFood, filterFoods } from "./utils/foodUtils";
-
+import CoupangAutoBanner_320x100 from "./components/CoupangAutoBanner_320x100";
 import ShareButton from "./components/ShareButton";
 import MainHeader from "./components/MainHeader";
 import FoodCard from "./components/FoodCard";
@@ -91,11 +91,17 @@ export default function HomePage() {
                 <>
                     <FoodCard food={selected} />
                     <RecommendButton onClick={handleRecommend} />
+                    {/* ✅ 광고 삽입 위치 1 */}
+                    <CoupangAutoBanner_320x100 />
+
                     <ShareButton
                         foodName={selected.name}
                         message={selected.message}
                         imageUrl={selected.image}
                     />
+
+                    {/* ✅ 광고 삽입 위치 2 (원하면 이쪽에도 가능) */}
+                    {/* <CoupangAutoBanner_320x100 /> */}
                 </>
             )}
         </main>

@@ -8,6 +8,8 @@ import RecommendButton from "./RecommendButton";
 import FilterChips from "./FilterChips";
 import MainHeader from "./MainHeader";
 import ShareButton from "./ShareButton";
+import KakaoAdBanner_250 from "./KakaoAdBanner_250";
+import KakaoAdBanner_300 from "./KakaoAdBanner_300";
 
 const categoryOptions = [
     "한식",
@@ -33,7 +35,6 @@ const ClientMain = () => {
     const [selected, setSelected] = useState<FoodItem | null>(null);
     const [history, setHistory] = useState<FoodItem[]>([]);
 
-    // 첫 렌더 시 랜덤 추천 하나
     useEffect(() => {
         const random = getRandomFood(foodList);
         setSelected(random);
@@ -52,7 +53,6 @@ const ClientMain = () => {
             return;
         }
 
-        // 중복 방지 로직: 현재 selected와 같은 음식이 나오지 않도록 10번까지 재시도
         let newFood = getRandomFood(filtered);
         let attempts = 0;
         while (newFood.id === selected?.id && attempts < 10) {
@@ -62,7 +62,6 @@ const ClientMain = () => {
 
         setSelected(newFood);
 
-        // 히스토리 중복 방지 및 최대 5개 저장
         setHistory(prev => {
             const exists = prev.find(item => item.id === newFood.id);
             if (exists) return prev;
@@ -102,6 +101,9 @@ const ClientMain = () => {
             {selected && <FoodCard food={selected} />}
             <RecommendButton onClick={handleRecommend} />
 
+            {/* ✅ 광고 1 - 추천 버튼 아래 */}
+            <KakaoAdBanner_250 />
+
             {selected && (
                 <ShareButton
                     foodName={selected.name}
@@ -115,6 +117,12 @@ const ClientMain = () => {
                     <h3 className="text-lg font-semibold text-center mb-2 text-[#F16767]">
                         최근 본 메뉴
                     </h3>
+
+                    {/* ✅ 광고 2 - 히스토리 위 */}
+                    <div className="flex justify-center mb-4">
+                        <KakaoAdBanner_300 />
+                    </div>
+
                     <div className="flex flex-wrap justify-center gap-3">
                         {history.slice(1).map(food => (
                             <FoodCard key={food.id} food={food} />

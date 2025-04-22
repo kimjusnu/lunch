@@ -43,6 +43,16 @@ export default function RootLayout({
                     content="default"
                 />
                 <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+                <meta
+                    name="google-adsense-account"
+                    content="ca-pub-7091520493336042"
+                ></meta>
+
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7091520493336042"
+                    crossOrigin="anonymous"
+                ></script>
             </Head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
