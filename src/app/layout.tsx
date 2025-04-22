@@ -34,6 +34,10 @@ export default function RootLayout({
     return (
         <html lang="ko">
             <Head>
+                <meta
+                    name="google-site-verification"
+                    content="MZlxuQbZ_9eN6ZNus4JoJMkdu8vZr_Sy5SlGaeu3DFo"
+                />
                 <meta name="theme-color" content="#FCB454" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="icon" href="/favicon.ico" />
