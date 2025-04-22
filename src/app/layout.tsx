@@ -16,16 +16,27 @@ const geistMono = Geist_Mono({
 
 // ✅ SEO + PWA metadata 설정은 export로 분리
 export const metadata: Metadata = {
-    title: "점심뭐먹지",
-    description: "오늘 점심 뭐 먹지? 한식, 분식, 일식 등 랜덤 메뉴 추천 앱!",
-    icons: {
-        icon: "/favicon.ico",
-        apple: "/icons/icon-192x192.png",
+    title: "점심뭐먹지 - 메뉴 고민 끝! 랜덤 점심 메뉴 추천",
+    description:
+        "오늘 점심 뭐 먹지? 한식, 중식, 일식, 양식, 분식 등 다양한 메뉴를 랜덤으로 추천해드립니다. 필터 기능으로 원하는 종류의 음식만 골라보세요!",
+    keywords:
+        "점심메뉴추천,점심추천,메뉴추천,랜덤메뉴,한식,중식,일식,양식,분식,점심고민",
+    authors: [{ name: "점심뭐먹지" }],
+    creator: "점심뭐먹지",
+    publisher: "점심뭐먹지",
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
     },
-    manifest: "/manifest.json",
-    themeColor: "#FCB454",
     openGraph: {
-        title: "점심 뭐먹지",
+        title: "점심 뭐먹지 - 랜덤 메뉴 추천",
         description: "메뉴 고민 그만! 점심메뉴 랜덤 추천기",
         url: "https://lunchmenu-one.vercel.app",
         images: [
@@ -36,11 +47,20 @@ export const metadata: Metadata = {
                 alt: "점심 뭐먹지 랜덤 추천",
             },
         ],
+        locale: "ko_KR",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "점심 뭐먹지 - 랜덤 메뉴 추천",
+        description: "메뉴 고민 그만! 점심메뉴 랜덤 추천기",
+        images: ["/og-image.png"],
     },
     other: {
         "google-site-verification":
             "MZlxuQbZ_9eN6ZNus4JoJMkdu8vZr_Sy5SlGaeu3DFo",
         "google-adsense-account": "ca-pub-7091520493336042",
+        "naver-site-verification": "", // 네이버 서치어드바이저 인증 코드
     },
 };
 
