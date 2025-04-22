@@ -23,7 +23,7 @@ const ImageWithSkeleton = ({
 
     return (
         <div
-            className="relative"
+            className="relative mx-auto"
             style={{ width: `${width}px`, height: `${height}px` }}
         >
             {!isLoaded && (
