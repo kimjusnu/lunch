@@ -14,7 +14,6 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-// ✅ SEO + PWA metadata 설정은 export로 분리
 export const metadata: Metadata = {
     title: "점심뭐먹지 - 메뉴 고민 끝! 랜덤 점심 메뉴 추천",
     description:
@@ -24,17 +23,12 @@ export const metadata: Metadata = {
     authors: [{ name: "점심뭐먹지" }],
     creator: "점심뭐먹지",
     publisher: "점심뭐먹지",
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-            index: true,
-            follow: true,
-            "max-video-preview": -1,
-            "max-image-preview": "large",
-            "max-snippet": -1,
-        },
+    icons: {
+        icon: "/favicon.ico",
+        apple: "/icons/icon-192x192.png",
     },
+    manifest: "/manifest.json",
+    themeColor: "#FCB454",
     openGraph: {
         title: "점심 뭐먹지 - 랜덤 메뉴 추천",
         description: "메뉴 고민 그만! 점심메뉴 랜덤 추천기",
@@ -56,15 +50,25 @@ export const metadata: Metadata = {
         description: "메뉴 고민 그만! 점심메뉴 랜덤 추천기",
         images: ["/og-image.png"],
     },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
     other: {
         "google-site-verification":
             "MZlxuQbZ_9eN6ZNus4JoJMkdu8vZr_Sy5SlGaeu3DFo",
         "google-adsense-account": "ca-pub-7091520493336042",
-        "naver-site-verification": "", // 네이버 서치어드바이저 인증 코드
+        "naver-site-verification": "",
     },
 };
 
-// ✅ viewport도 따로 분리해야 경고 안 남
 export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
@@ -81,6 +85,15 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
+                {/* Google AdSense */}
+                <Script
+                    id="adsbygoogle-init"
+                    strategy="beforeInteractive"
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7091520493336042"
+                    crossOrigin="anonymous"
+                />
+
                 {/* ✅ PWA Service Worker */}
                 <RegisterServiceWorker />
 
@@ -90,19 +103,17 @@ export default function RootLayout({
                     strategy="beforeInteractive"
                 />
 
-                {/* ✅ Google AdSense 스크립트 */}
-                <Script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7091520493336042"
-                    strategy="afterInteractive"
-                    crossOrigin="anonymous"
-                />
-
                 <div className="w-full max-w-[480px] mx-auto min-h-screen bg-white">
                     {children}
                 </div>
+
+                {/* AdSense 광고 자동 삽입 활성화 */}
+                <Script id="adsense-auto-ads" strategy="afterInteractive">
+                    {`
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    `}
+                </Script>
             </body>
         </html>
     );
 }
-// d
