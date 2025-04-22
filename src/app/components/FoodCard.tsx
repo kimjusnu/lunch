@@ -17,6 +17,7 @@ const FoodCard = ({ food }: FoodCardProps) => {
                 alt={food.name}
                 width={180}
                 height={140}
+                className="mx-auto"
             />
             <h2 className="text-xl font-bold mt-4">{food.name}</h2>
             <p className="text-sm text-gray-700 mt-2">{food.message}</p>
