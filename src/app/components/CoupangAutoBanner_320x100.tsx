@@ -18,7 +18,7 @@ const CoupangAutoBanner_320x100 = () => {
                     id: 858901,
                     template: "carousel",
                     trackingCode: "AF1075211",
-                    width: "320",
+                    width: "360",
                     height: "100",
                     tsource: "",
                 });
